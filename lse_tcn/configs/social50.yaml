@@ -1,0 +1,94 @@
+seed: 42
+window_size: 60
+infer_stride: 5
+num_workers: 2
+output_dir: outputs
+include_garbage: true
+labels:
+  - GARBAGE_SILENCIO
+  - hola
+  - buenos_dias
+  - buenas_tardes
+  - buenas_noches
+  - adios
+  - por_favor
+  - gracias
+  - perdon
+  - bien
+  - mal
+  - si
+  - no
+  - ayudar
+  - yo
+  - tu
+  - nombre
+  - edad
+  - familia
+  - amigo
+  - padre
+  - madre
+  - hijo
+  - hombre
+  - mujer
+  - comer
+  - beber
+  - querer
+  - pagar
+  - trabajar
+  - estudiar
+  - saber
+  - entender
+  - esperar
+  - ver
+  - ir
+  - venir
+  - poder
+  - que
+  - donde
+  - cuando
+  - quien
+  - hoy
+  - manana
+  - ayer
+  - ahora
+  - contento
+  - triste
+  - cansado
+  - enfermo
+  - dolor
+
+data:
+  cache_path: data/processed/social50_dataset.pt
+  social50_list_path: configs/social50.yaml
+  swl_lse:
+    enabled: true
+    path: data/raw/swl_lse
+    label_map_path: data/raw/swl_lse/label_map.json
+  sign4all:
+    enabled: true
+    path: data/raw/sign4all
+    label_map_path: data/raw/sign4all/label_map.json
+
+train:
+  epochs: 25
+  batch_size: 32
+  lr: 0.001
+  weight_decay: 0.0001
+  dropout: 0.25
+  class_balanced_sampling: true
+  loso: false
+
+model:
+  input_dim: 144
+  channels: 64
+  dilations: [1, 2, 4, 8]
+  kernel_size: 3
+  dropout: 0.25
+
+realtime:
+  movement_threshold: 0.015
+  smoothing_window: 5
+  confidence_threshold: 0.75
+  webcam_index: 0
+  draw_face: false
+  rotate_align: false
